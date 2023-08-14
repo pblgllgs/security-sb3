@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres_db_security
+    image: postgres:15.1
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: jwt_security
+      POSTGRES_USER: postgres
+    volumes:
+      - postgres_db_security:/var/lib/postgresql/data
+
+volumes:
+  postgres_db_security:
+    external: false
