@@ -18,20 +18,45 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "_user")
+@Table(
+        name = "_user",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "email_UK",
+                        columnNames = "email"
+                )
+        }
+)
 public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;
 
-    private String firstname;
+    @Column(
+            nullable = false,
+            name = "first_name"
+    )
+    private String firstName;
 
-    private String lastname;
+    @Column(
+            nullable = false,
+            name = "last_name"
+    )
+    private String lastName;
 
+    @Column(
+            nullable = false
+    )
     private String email;
 
+    @Column(
+            nullable = false
+    )
     private String password;
 
+    @Column(
+            nullable = false
+    )
     @Enumerated(EnumType.STRING)
     private Role role;
 

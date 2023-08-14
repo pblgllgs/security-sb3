@@ -4,7 +4,9 @@ import com.pblgllgs.spring.security.config.JwtService;
 import com.pblgllgs.spring.security.repository.UserRepository;
 import com.pblgllgs.spring.security.user.Role;
 import com.pblgllgs.spring.security.user.User;
+import com.pblgllgs.spring.security.user.UserDto;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,15 +18,14 @@ public class AuthenticationService {
 
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
-
-    private final JwtService jwtService;
-
     private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
+    private final ModelMapper modelMapper;
 
     public AuthenticationResponse register(RegisterRequest request){
         var user = User.builder()
-                .firstname(request.getFirstname())
-                .lastname(request.getLastname())
+                .firstName(request.getFirstname())
+                .lastName(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
@@ -33,6 +34,7 @@ public class AuthenticationService {
         var jwtToken =jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .userDto(modelMapper.map(user, UserDto.class))
                 .build();
     }
 
@@ -48,6 +50,7 @@ public class AuthenticationService {
         var jwtToken =jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .userDto(modelMapper.map(user, UserDto.class))
                 .build();
     }
 }
