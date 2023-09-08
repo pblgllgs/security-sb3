@@ -16,3 +16,8 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+cors:
+  allowed-origins: "*"
+  allowed-methods: "*"
+  exposed-headers: "*"
+  allowed-headers: "*"
