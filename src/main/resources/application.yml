@@ -21,3 +21,9 @@ cors:
   allowed-methods: "*"
   exposed-headers: "*"
   allowed-headers: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
