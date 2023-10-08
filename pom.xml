@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.pblgllgs.spring</groupId>
 	<artifactId>security-sb3</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>security</name>
 	<description>Demo project for Spring Boot security</description>
 	<properties>
@@ -101,36 +101,6 @@
 						</exclude>
 					</excludes>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.google.cloud.tools</groupId>
-				<artifactId>jib-maven-plugin</artifactId>
-				<version>3.3.2</version>
-				<configuration>
-					<from>
-						<image>eclipse-temurin:17</image>
-						<platforms>
-							<platform>
-								<architecture>amd64</architecture>
-								<os>linux</os>
-							</platform>
-						</platforms>
-					</from>
-					<to>
-						<image>docker.io/${docker.username}/${project.artifactId}-backend:${project.version}</image>
-						<tags>
-							<tag>latest</tag>
-						</tags>
-					</to>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
